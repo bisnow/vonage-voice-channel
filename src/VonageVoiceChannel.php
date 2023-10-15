@@ -65,7 +65,7 @@ class VonageVoiceChannel
      */
     public function send($notifiable, Notification $notification)
     {
-        if (! $to = $notifiable->routeNotificationFor('vonage', $notification)) {
+        if (! $to = $notifiable->routeNotificationFor('voice', $notification)) {
             return;
         }
 
