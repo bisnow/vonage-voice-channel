@@ -1,9 +1,9 @@
 {
-    "name": "roomies/vonage-voice-channel",
+    "name": "bisnow/vonage-voice-channel",
     "description": "Send Laravel notifications through a phone call",
     "keywords": [
         "laravel",
-        "roomies",
+        "bisnow",
         "vonage-voice-channel",
         "laravel-notification-channel"
     ],

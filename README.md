@@ -11,7 +11,7 @@ This package provides a notification channel for the Laravel framework that work
 You can install the package via Composer:
 
 ```bash
-composer require roomies/vonage-voice-channel
+composer require bisnow/vonage-voice-channel
 ```
 
 Under the hood we use [`laravel/vonage-notification-channel`](https://github.com/laravel/vonage-notification-channel) to configure Vonage, so make sure you have it properly configured using Vonage environment variables. However, in order to make voice calls you need to provide additional credentials in your environment. Note that the private key can be a string or path to the key file.
