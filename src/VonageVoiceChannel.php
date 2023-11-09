@@ -8,6 +8,7 @@ use Vonage\Voice\Endpoint\Phone;
 use Vonage\Voice\NCCO\Action\Talk;
 use Vonage\Voice\NCCO\NCCO;
 use Vonage\Voice\OutboundCall;
+use Vonage\Voice\VoiceObjects\AdvancedMachineDetection;
 
 class VonageVoiceChannel
 {
@@ -82,14 +83,20 @@ class VonageVoiceChannel
      * @param  bool    $goToVoicemail
      * @return \Vonage\Voice\Webhook\Event
      */
-    protected function call($phoneNumber, $message, $goToVoicemail = true)
+    protected function call($phoneNumber, $message, $goToVoicemail = false)
     {
         $outboundCall = new OutboundCall(new Phone($phoneNumber), new Phone($this->from));
+
         if ($goToVoicemail) {
-            $outboundCall->setMachineDetection(OutboundCall::MACHINE_CONTINUE);
+            $behavior = AdvancedMachineDetection::MACHINE_BEHAVIOUR_CONTINUE;
         } else {
-            $outboundCall->setMachineDetection(OutboundCall::MACHINE_HANGUP);
+            $behavior = AdvancedMachineDetection::MACHINE_BEHAVIOUR_HANGUP;
         }
+        $outboundCall->setAdvancedMachineDetection(new AdvancedMachineDetection(
+            $behavior,
+            AdvancedMachineDetection::BEEP_TIMEOUT_MAX,
+            AdvancedMachineDetection::MACHINE_MODE_DETECT_BEEP,
+        ));
 
         $ncco = (new NCCO)->addAction(Talk::factory($message, [
             'level' => 1,
