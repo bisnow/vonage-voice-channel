@@ -82,7 +82,7 @@ class VonageVoiceChannel
      * @param  bool    $goToVoicemail
      * @return \Vonage\Voice\Webhook\Event
      */
-    protected function call($phoneNumber, $message, $goToVoicemail = true)
+    protected function call($phoneNumber, $message, $goToVoicemail = false)
     {
         $outboundCall = new OutboundCall(new Phone($phoneNumber), new Phone($this->from));
         if ($goToVoicemail) {
