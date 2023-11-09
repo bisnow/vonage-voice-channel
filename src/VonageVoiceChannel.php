@@ -79,11 +79,17 @@ class VonageVoiceChannel
      *
      * @param  string  $phoneNumber
      * @param  string  $message
+     * @param  bool    $goToVoicemail
      * @return \Vonage\Voice\Webhook\Event
      */
-    protected function call($phoneNumber, $message)
+    protected function call($phoneNumber, $message, $goToVoicemail = true)
     {
         $outboundCall = new OutboundCall(new Phone($phoneNumber), new Phone($this->from));
+        if ($goToVoicemail) {
+            $outboundCall->setMachineDetection(OutboundCall::MACHINE_CONTINUE);
+        } else {
+            $outboundCall->setMachineDetection(OutboundCall::MACHINE_HANGUP);
+        }
 
         $ncco = (new NCCO)->addAction(Talk::factory($message, [
             'level' => 1,
