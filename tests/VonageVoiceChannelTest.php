@@ -71,7 +71,7 @@ class TestNotifiable
 
     public $phone_number = '5555555555';
 
-    public function routeNotificationForVonage($notification)
+    public function routeNotificationForVoice($notification)
     {
         return $this->phone_number;
     }
